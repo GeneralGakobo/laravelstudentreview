@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class competencyScore extends Model
 {
     use HasFactory;
-    protected $table="department";
+    protected $table="competency_scores";
     protected $fillable=[
-        'school_id',
-        'department',
+        'score_name',
+        'score_value',
     ];
 }

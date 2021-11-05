@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Department extends Model
+class semester extends Model
 {
     use HasFactory;
-    protected $table="department";
+    protected $table="semesters";
     protected $fillable=[
-        'school_id',
-        'department',
+        'semester_name',
+        'date_from',
+        'date_to',
+        'academic_year',
+        'is_active',
     ];
 }
