@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class designation extends Model
 {
     use HasFactory;
-    protected $table="designation";
+    protected $table="designations";
     protected $fillable=[
         'designation_name',
     ];

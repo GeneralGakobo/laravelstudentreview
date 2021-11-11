@@ -3,83 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Models\staffCategory;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class StaffCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
-    }
+        $staffcategory = DB::table('staff_categories')->orderBy('id', 'asc')->get();
+		return view('staffcategory.index', ["staffcategory" => $staffcategory]);
+    }   
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        public function create_page(){
+            return view('staffcategory.add_staffcategory');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        public function create(Request $requests) {              
+            $staffcategory =$requests['adjArr'];		//return;
+            foreach ($staffcategory as $key=>$value) {
+                
+                $validator = Validator::make($requests->all(), [
+                    'staff_category'=>'unique:staff_category',
+                ]);
+                if ($validator->fails()) {
+                    return redirect('/add-staffcategory')
+                        ->withInput()
+                        ->withErrors($validator);
+                }	
+                staffcategory::create(['staff_category'=>$value]); 
+            }
+            return redirect('/add-staffcategory')->with('success', 'Data saved succesfully');
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\staffCategory  $staffCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(staffCategory $staffCategory)
-    {
-        //
-    }
+        public function edit(Request $request){
+            $id=$request->id;
+            $staff_category=$request->staff_category;
+           // dd($request);
+            staffcategory:where('id',$id)->update(['staff_category'=>$staff_category]);
+            $row = staffcategory::where('id',$id)->first();
+            return "<td>".$row->id."</td>
+            <td>".$row->staff_category."</td>
+            <td> <button type='button' class='btn btn-success' data-toggle='modal' onclick='showDialog($row->id)'>Updated</button></td>
+            ";
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\staffCategory  $staffCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(staffCategory $staffCategory)
-    {
-        //
-    }
+        }
+        public function delete($id){
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\staffCategory  $staffCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, staffCategory $staffCategory)
-    {
-        //
-    }
+            $del = staffcategory::findOrFail($id);
+            $del->delete();
+            return redirect('staffcategory')->with('success', 'Deleted successfully!');
+                
+        }
+    
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\staffCategory  $staffCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(staffCategory $staffCategory)
-    {
-        //
-    }
+    
 }

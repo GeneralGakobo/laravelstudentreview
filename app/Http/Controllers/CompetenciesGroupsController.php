@@ -3,83 +3,62 @@
 namespace App\Http\Controllers;
 
 use App\Models\competenciesGroups;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class CompetenciesGroupsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
-    }
+        $competencygroups = DB::table('competencies_groups')->orderBy('id', 'asc')->get();
+		return view('competencygroups.index', ["competencygroups" => $competencygroups]);
+    }   
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        public function create_page(){
+            return view('competencygroups.add_competencygroups');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        public function create(Request $requests) {              
+            $competencygroups =$requests['adjArr'];		//return;
+            foreach ($competencygroups as $key=>$value) {
+                
+                $validator = Validator::make($requests->all(), [
+                    'competency_group'=>'unique:competency_group',
+                ]);
+                if ($validator->fails()) {
+                    return redirect('/add-competencygroups')
+                        ->withInput()
+                        ->withErrors($validator);
+                }	
+                competenciesGroups::create(['competency_group'=>$value]); 
+            }
+            return redirect('/add-competencygroups')->with('success', 'Data saved succesfully');
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\competenciesGroups  $competenciesGroups
-     * @return \Illuminate\Http\Response
-     */
-    public function show(competenciesGroups $competenciesGroups)
-    {
-        //
-    }
+        public function edit(Request $request){
+            $id=$request->id;
+            $competency_group=$request->competency_group;
+           // dd($request);
+            competencygroups::where('id',$id)->update(['competency_group'=>$competency_group]);
+            $row = competencygroups::where('id',$id)->first();
+            return "<td>".$row->id."</td>
+            <td>".$row->competency_group."</td>
+            <td> <button type='button' class='btn btn-success' data-toggle='modal' onclick='showDialog($row->id)'>Updated</button></td>
+            ";
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\competenciesGroups  $competenciesGroups
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(competenciesGroups $competenciesGroups)
-    {
-        //
-    }
+        }
+        public function delete($id){
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\competenciesGroups  $competenciesGroups
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, competenciesGroups $competenciesGroups)
-    {
-        //
-    }
+            $del = competencyGroups::findOrFail($id);
+            $del->delete();
+            return redirect('competencygroups')->with('success', 'Deleted successfully!');
+                
+        }
+    
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\competenciesGroups  $competenciesGroups
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(competenciesGroups $competenciesGroups)
-    {
-        //
-    }
+    
 }

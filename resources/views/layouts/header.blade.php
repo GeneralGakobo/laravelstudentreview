@@ -61,6 +61,36 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-white " href="/designations">
+           
+            <span class="nav-link-text ms-1">Designations</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/employmenttype">
+           
+            <span class="nav-link-text ms-1">EmploymentType</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/staffcategory">
+           
+            <span class="nav-link-text ms-1">staff_category</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/competencygroups">
+           
+            <span class="nav-link-text ms-1">competency_group</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/student">
+           
+            <span class="nav-link-text ms-1">students</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-white " href="./pages/billing.html">
            
             <span class="nav-link-text ms-1">Competencies</span>

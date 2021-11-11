@@ -2,84 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\designation;
+use App\Models\Designation;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class DesignationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   
     public function index()
     {
-        //
-    }
+        $designations = DB::table('designations')->orderBy('id', 'asc')->get();
+		return view('designation.index', ["designations" => $designations]);
+    }   
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        public function create_page(){
+            return view('designation.add_designation');
+        }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        public function create(Request $requests) {              
+            $designations =$requests['adjArr'];		//return;
+            foreach ($designations as $key=>$value) {
+                
+                $validator = Validator::make($requests->all(), [
+                    'designation_name'=>'unique:designation_name',
+                ]);
+                if ($validator->fails()) {
+                    return redirect('/add-designation')
+                        ->withInput()
+                        ->withErrors($validator);
+                }	
+                designation::create(['designation_name'=>$value]); 
+            }
+            return redirect('/add-designation')->with('success', 'Data saved succesfully');
+        }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\designation  $designation
-     * @return \Illuminate\Http\Response
-     */
-    public function show(designation $designation)
-    {
-        //
-    }
+        public function edit(Request $request){
+            $id=$request->id;
+            $designation_name=$request->designation_name;
+           // dd($request);
+            designation::where('id',$id)->update(['designation_name'=>$designation_name]);
+            $row = designation::where('id',$id)->first();
+            return "<td>".$row->id."</td>
+            <td>".$row->designation_name."</td>
+            <td> <button type='button' class='btn btn-success' data-toggle='modal' onclick='showDialog($row->id)'>Updated</button></td>
+            ";
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\designation  $designation
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(designation $designation)
-    {
-        //
-    }
+        }
+        public function delete($id){
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\designation  $designation
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, designation $designation)
-    {
-        //
-    }
+            $del = designation::findOrFail($id);
+            $del->delete();
+            return redirect('designations')->with('success', 'Deleted successfully!');
+                
+        }
+    
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\designation  $designation
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(designation $designation)
-    {
-        //
-    }
+    
 }

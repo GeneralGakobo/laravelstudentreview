@@ -18,7 +18,7 @@ class student extends Model
     'mobile',
     'image',
     'course_id',
-    'study_year',
+    'study_year_id',
 
     ];
 }
