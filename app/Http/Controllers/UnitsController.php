@@ -4,82 +4,55 @@ namespace App\Http\Controllers;
 
 use App\Models\units;
 use Illuminate\Http\Request;
+use App\Models\course;
+use App\Http\Controllers\Controller;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class UnitsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+            
+        public function index() {
+            $data = DB::table("units")
+            ->join('courses','courses.id','=','units.course_id') 
+            ->select('units.*', 'courses.course_name')->get();	
+            return view('units.index', ["data" => $data,]);
+        }
+        public function create_page(){
+            $course = course::select('courses.*')->get();
+            return view('units.add_unit', ["course"=>$course]);
+        }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        public function create(Request $requests) {
+           
+            $course_id =$requests['adjArr'];
+            $unit_name=$requests['acjArr'];           
+             foreach ($course_id as $key=>$value) {       
+                units::create(['course_id'=>$value,'unit_name'=>$unit_name[$key]]);           
+                  }     
+                 return redirect('/add-unit')->with('success', 'Data saved succesfully');
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\units  $units
-     * @return \Illuminate\Http\Response
-     */
-    public function show(units $units)
-    {
-        //
-    }
+         public function edit(Request $request){
+            $id=$request->id;
+            $course_id=$request->course_id;
+            $unit_name=$request->unit_name;
+           // dd($request);
+            units::where('id',$id)->update(['course_id'=>$course_id,'unit_name'=>$unit_name]);
+            $row = units::where('id',$request->get('id'))->first();
+            return "<td>".$row->id."</td>
+            <td>".$row->course_id."</td>
+            <td>".$row->unit_name."</td>
+            <td> <button type='button' class='btn btn-primary' data-toggle='modal' onclick='showDialog($row->id)'>Update</button></td>
+            ";
+         }
+            
+            public function delete($id){
+                $del = units::findOrFail($id);
+                $del->delete();
+                return redirect('unit')->with('success', 'Deleted successfully!');           
+            }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\units  $units
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(units $units)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\units  $units
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, units $units)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\units  $units
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(units $units)
-    {
-        //
-    }
 }

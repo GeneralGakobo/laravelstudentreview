@@ -91,13 +91,58 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/billing.html">
+          <a class="nav-link text-white " href="/admin">
+           
+            <span class="nav-link-text ms-1">admins</span>
+          </a>
+          <a class="nav-link text-white " href="/lecturer">
+           
+           <span class="nav-link-text ms-1">Lecturers</span>
+         </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/hod">
+           
+            <span class="nav-link-text ms-1">HOD</span>
+          </a>
+        </li><li class="nav-item">
+          <a class="nav-link text-white " href="/unit">
+           
+            <span class="nav-link-text ms-1">units</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="/course">
+           
+            <span class="nav-link-text ms-1">Courses</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="./competency">
            
             <span class="nav-link-text ms-1">Competencies</span>
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/virtual-reality.html">
+          <a class="nav-link text-white " href="./semester">
+           
+            <span class="nav-link-text ms-1">semester</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="./semesterunit">
+           
+            <span class="nav-link-text ms-1">Semster Units</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="./studentselectedcourse">
+           
+            <span class="nav-link-text ms-1">student selected course</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white " href="./competencyscore">
             
             <span class="nav-link-text ms-1">Competencies Score</span>
           </a>

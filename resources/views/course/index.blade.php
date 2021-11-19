@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Student')
-@section('page-title', 'Student')
+@section('title', 'Course')
+@section('page-title', 'Course')
 
 @section('content')
 @if(Session::has('success'))
@@ -17,23 +17,18 @@
         <div class="row">
             <div class="card shadow col-md-12">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">students</h6>  </div>
+            <h6 class="m-0 font-weight-bold text-primary">courses</h6>  </div>
 
             <div class="card-body">
             <div class="table-responsive">
-                <a href="/add-student"><button class="btn btn-primary">ADD</button></a>
+                <a href="/add-course"><button class="btn btn-primary">ADD</button></a>
                 <table class="table table-bordered school" id="dataTable"  cellspacing="0">
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>first_name</th>  
-                            <th>last_name</th>
-                            <th>Reg_no</th>
-                            <th>email</th>
-                            <th>gender</th>
-                            <th>mobile</th>
-                          <th>course</th>
-                            <th>study_year</th>      
+                            <th>Department</th>  
+                            <th>Course Code/th> 
+                            <th>Course Name</th>     
                             <th>Edit</th>
                             <th>Delete</th>
                             
@@ -44,15 +39,9 @@
                             <tr id="row_{{$value->id}}">
 
                                  <td>{{$value->id}}</td> 
-                                 <td>{{$value->first_name}}</td> 
-                                 <td>{{$value->last_name}}</td>
-                                 <td>{{$value->reg_no}}</td>
-                                 <td>{{$value->email}}</td>
-                                 <td>{{$value->gender}}</td>
-                                 <td>{{$value->mobile}}</td>
-                                 
-                                 <td>{{$value->course_name}}</td>
-                                 <td>{{$value->study_year_id}}</td>      
+                                 <td>{{$value->department}}</td> 
+                                 <td>{{$value->course_id}}</td>      
+                                 <td>{{$value->course_name}}</td>      
                                  <td><button class="btn btn-primary" style="color:white" onclick="showDialog({{$value->id}})">Edit</button></td>
                                  <td><button data-id="{{$value->id}}" class="btn btn-danger unassigned">Delete</button></td>
 
@@ -93,10 +82,10 @@
         function showDialog(id) {          
                     var data =$("form").serialize();
                console.log(id);
-               var url =   "{{ url('/edit-student-modal') }}";
+               var url =   "{{ url('/edit-course-modal') }}";
              //  var data = "id="+id;
 
-               $("#myModalLabel").html("Edit Student");
+               $("#myModalLabel").html("Edit course");
                $("#modalBody").html("Loading...");  // Or use a progress bar...
                $("#myModal").modal("show");
                $.ajax({
@@ -115,7 +104,7 @@
         function edit(id){
             
             var data = $("form").serialize();
-            var url =   "{{ url('/edit-student') }}";
+            var url =   "{{ url('/edit-unit') }}";
         
             $.ajax({
                     type: "POST",
@@ -135,13 +124,13 @@
                 var id = $(this).data('id').toString();
                     swal({
                     title: "Delete!",
-                    text: "Are you sure you want to delete this student!",
+                    text: "Are you sure you want to delete this course!",
                     icon: "error",
                     buttons: [true, "Delete"],
                     })
                     .then((willDelete) => {
                         if (willDelete) {
-                            window.location.href="{{url('/delete-student/' )}}"+"/"+id;
+                            window.location.href="{{url('/delete-course/' )}}"+"/"+id;
                             swal({
                                 title: "Success!",
                                 text: "Deleted succesfully",

@@ -11,7 +11,7 @@ class lecturer extends Model
     protected $table="lecturers";
     protected $fillable=[
         'employment_type_id',
-        'staff_category',
+        'staff_category_id',
         'first_name',
         'last_name',
         'reference_no',

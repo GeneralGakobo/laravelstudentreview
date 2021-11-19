@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Student')
-@section('page-title', 'Student')
+@section('title', 'Hod')
+@section('page-title', 'Hod')
 
 @section('content')
 @if(Session::has('success'))
@@ -17,23 +17,24 @@
         <div class="row">
             <div class="card shadow col-md-12">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">students</h6>  </div>
+            <h6 class="m-0 font-weight-bold text-primary">HOD</h6>  </div>
 
             <div class="card-body">
             <div class="table-responsive">
-                <a href="/add-student"><button class="btn btn-primary">ADD</button></a>
+                <a href="/add-hod"><button class="btn btn-primary">ADD</button></a>
                 <table class="table table-bordered school" id="dataTable"  cellspacing="0">
                     <thead>
                         <tr>
                             <th>id</th>
                             <th>first_name</th>  
                             <th>last_name</th>
-                            <th>Reg_no</th>
+                            <th>reference_no</th>
                             <th>email</th>
-                            <th>gender</th>
+                            <th>designation</th>
+                            <th>department</th>
                             <th>mobile</th>
-                          <th>course</th>
-                            <th>study_year</th>      
+                          <th>employment_type</th>
+                            <th>staff_category</th>      
                             <th>Edit</th>
                             <th>Delete</th>
                             
@@ -41,18 +42,18 @@
                     </thead>
                     <tbody>
                             @foreach ($data as $key => $value)
-                            <tr id="row_{{$value->id}}">
+                            <tr id="{{$value->id}}">
 
                                  <td>{{$value->id}}</td> 
                                  <td>{{$value->first_name}}</td> 
                                  <td>{{$value->last_name}}</td>
-                                 <td>{{$value->reg_no}}</td>
+                                 <td>{{$value->reference_no}}</td>
                                  <td>{{$value->email}}</td>
-                                 <td>{{$value->gender}}</td>
+                                 <td>{{$value->designation_name}}</td>
+                                 <td>{{$value->department}}</td>
                                  <td>{{$value->mobile}}</td>
-                                 
-                                 <td>{{$value->course_name}}</td>
-                                 <td>{{$value->study_year_id}}</td>      
+                                 <td>{{$value->employment_type}}</td> 
+                                 <td>{{$value->staff_category}}</td>     
                                  <td><button class="btn btn-primary" style="color:white" onclick="showDialog({{$value->id}})">Edit</button></td>
                                  <td><button data-id="{{$value->id}}" class="btn btn-danger unassigned">Delete</button></td>
 
@@ -85,18 +86,22 @@
         @section('scripts')
 
         <script type="text/javascript">
-                $(document).ready(function() {
+                  $(document).ready(function() {
         $('#dataTable').DataTable();
         });
+           
+        </script>
+
+        <script>
             
         
         function showDialog(id) {          
                     var data =$("form").serialize();
                console.log(id);
-               var url =   "{{ url('/edit-student-modal') }}";
+               var url =   "{{ url('/edit-hod-modal') }}";
              //  var data = "id="+id;
 
-               $("#myModalLabel").html("Edit Student");
+               $("#myModalLabel").html("Edit hod");
                $("#modalBody").html("Loading...");  // Or use a progress bar...
                $("#myModal").modal("show");
                $.ajax({
@@ -115,7 +120,7 @@
         function edit(id){
             
             var data = $("form").serialize();
-            var url =   "{{ url('/edit-student') }}";
+            var url =   "{{ url('/edit-hod') }}";
         
             $.ajax({
                     type: "POST",
@@ -135,13 +140,13 @@
                 var id = $(this).data('id').toString();
                     swal({
                     title: "Delete!",
-                    text: "Are you sure you want to delete this student!",
+                    text: "Are you sure you want to delete this HOD!",
                     icon: "error",
                     buttons: [true, "Delete"],
                     })
                     .then((willDelete) => {
                         if (willDelete) {
-                            window.location.href="{{url('/delete-student/' )}}"+"/"+id;
+                            window.location.href="{{url('/delete-hod/' )}}"+"/"+id;
                             swal({
                                 title: "Success!",
                                 text: "Deleted succesfully",

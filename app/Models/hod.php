@@ -11,13 +11,12 @@ class hod extends Model
     protected $table="hods";
     protected $fillable=[
         'employment_type_id',
-        'staff_category',
+        'staff_category_id',
         'first_name',
         'last_name',
         'reference_no',
         'email',
         'designation',
         'department_id',
-        'mobile',
-    ];
+        'mobile',];
 }

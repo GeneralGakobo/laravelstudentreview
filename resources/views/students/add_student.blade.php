@@ -11,6 +11,7 @@
   </button>
 </div>
 @endif
+<a href="/student"><button class="btn btn-primary btn-small">VIEW</button></a>
 
 <div class="card-body">
                 <form method="POST" action={{ route('add-students') }} enctype="multipart/form-data">

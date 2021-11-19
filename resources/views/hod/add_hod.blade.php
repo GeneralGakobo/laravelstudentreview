@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Add Lecturer')
-@section('page-title', 'Add Lecturer')
+@section('title', 'Add Hod')
+@section('page-title', 'Add Hod')
 
 @section('content')
 @if(Session::has('success'))
@@ -11,10 +11,10 @@
   </button>
 </div>
 @endif
-<a href="/lecturer"><button class="btn btn-primary btn-small">VIEW</button></a>
+<a href="/hod"><button class="btn btn-primary btn-small">VIEW</button></a>
 
 <div class="card-body">
-                <form method="POST" action={{ route('add-lecturer') }} enctype="multipart/form-data">
+                <form method="POST" action={{ route('add-hod') }} enctype="multipart/form-data">
                     @csrf
                         <div class="form-group row">
                       

@@ -18,7 +18,7 @@ class StudentController extends Controller
             
         public function index() {
             $data = DB::table('students')->select('students.*', 'courses.course_name')
-            ->join('courses','courses.id','=','students.course_id')       
+            ->join('courses','courses.id','=','students.course_id',)       
             ->orderBy('id', 'asc')->get();	
             return view('students.index', ["data" => $data,]);
         }
