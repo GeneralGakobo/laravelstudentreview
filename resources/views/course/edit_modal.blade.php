@@ -8,7 +8,7 @@ $row = \App\Models\course::where('id',$id)->first();
 <select type="text" class="form-control" name="department_id" value="{{$row->department}}">
 <option value="">-- Select departments --</option>
 
-  @foreach($department as $key=>$value)
+  @foreach($Department as $key=>$value)
    @if($value->id == $row->department_id)
    <option selected value="{{$value->id}}">{{$value->department}}</option>
 

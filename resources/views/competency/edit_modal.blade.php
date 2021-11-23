@@ -8,7 +8,7 @@ $row = \App\Models\competency::where('id',$id)->first();
 <select type="text" class="form-control" name="competency_group_id" value="{{$row->competency_group}}">
 <option value="">-- Select Competency Grooup --</option>
 
-  @foreach($competency as $key=>$value)
+  @foreach($competenciesGroups as $key=>$value)
    @if($value->id == $row->competency_group_id)
    <option selected value="{{$value->id}}">{{$value->competency_group}}</option>
 

@@ -104,7 +104,7 @@
         function edit(id){
             
             var data = $("form").serialize();
-            var url =   "{{ url('/edit-unit') }}";
+            var url =   "{{ url('/edit-course') }}";
         
             $.ajax({
                     type: "POST",

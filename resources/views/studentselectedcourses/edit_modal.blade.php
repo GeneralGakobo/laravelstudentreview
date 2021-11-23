@@ -30,7 +30,7 @@ $row = \App\Models\studentSelectedCourse::where('id',$id)->first();
    <option selected value="{{$value->id}}">{{$value->unit_id}}</option>
 
    @else
-   <option value="{{$value->id}}">{{$value->unit_id}</option>
+   <option value="{{$value->id}}">{{$value->unit_id}}</option>
 
    @endif
 

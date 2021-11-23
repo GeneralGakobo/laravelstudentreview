@@ -29,7 +29,7 @@ $row = \App\Models\semesterUnits::where('id',$id)->first();
 <input type="text" class="form-control" name="group" value="{{$row->group}}" />
 <br>
 <label for="">offered By</label>
-<input type="text" class="form-control" name="lecturer_id" value="{{$row->first_name,last_name}}" />
+<input type="text" class="form-control" name="lecturer_id" value="{{$row->first_name}}" />
 <br>
 <label for="">semester</label>
 <input type="text" class="form-control" name="semester_id" value="{{$row->semester_name}}" />

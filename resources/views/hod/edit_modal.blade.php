@@ -35,7 +35,7 @@ $row = \App\Models\hod::where('id',$id)->first();
 <select type="text" class="form-control" name="department_id" value="{{$row->department}}">
 <option value="">-- select department --</option>
 
-  @foreach($department as $key=>$value)
+  @foreach($Department as $key=>$value)
    @if($value->id == $row->department_id)
    <option selected value="{{$value->id}}">{{$value->department}}</option>
 
@@ -58,8 +58,8 @@ $row = \App\Models\hod::where('id',$id)->first();
 <select type="text" class="form-control" name="employment_type_id" value="{{$row->employment_type}}">
 <option value="">-- select employment_type --</option>
 
-  @foreach($employment as $key=>$value)
-   @if($value->id == $row->employment_type_id)
+  @foreach($employmentType as $key=>$value)
+   @if($value->id == $row->employmentType_id)
    <option selected value="{{$value->id}}">{{$value->employment_type}}</option>
 
    @else
@@ -74,7 +74,7 @@ $row = \App\Models\hod::where('id',$id)->first();
 <select type="text" class="form-control" name="staff_category_id" value="{{$row->staff_category}}">
 <option value="">-- select staff_category --</option>
 
-  @foreach($staff_category as $key=>$value)
+  @foreach($staffCategory as $key=>$value)
    @if($value->id == $row->staff_category_id)
    <option selected value="{{$value->id}}">{{$value->staff_category}}</option>
 
