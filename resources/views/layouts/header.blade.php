@@ -148,7 +148,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="./pages/rtl.html">
+          <a class="nav-link text-white " href="./evaluate">
             
             <span class="nav-link-text ms-1">Evaluate</span>
           </a>
