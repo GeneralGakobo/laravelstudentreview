@@ -1,6 +1,6 @@
 @extends('layouts.app')
-@section('title', 'Competency')
-@section('page-title', 'Competency')
+@section('title', 'Evaluation')
+@section('page-title', 'Evaluation')
 
 @section('content')
 @if(Session::has('success'))
@@ -17,31 +17,38 @@
         <div class="row">
             <div class="card shadow col-md-12">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Competencies</h6>  </div>
+            <h6 class="m-0 font-weight-bold text-primary">Evaluation</h6>  </div>
 
             <div class="card-body">
             <div class="table-responsive">
-                <a href="/add-competency"><button class="btn btn-primary">ADD</button></a>
+                <a href="#"><button class="btn btn-primary">ADD</button></a>
                 <table class="table table-bordered school" id="dataTable"  cellspacing="0">
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>Competency Group</th>  
-                            <th>Competency Name</th>     
-                            <th>Edit</th>
-                            <th>Delete</th>
-                            
+                            <th>semester Name</th>  
+                            <th>units</th>     
+                            <th>lecturer</th>   
+                            <th>Button</th>  
                         </tr>
                     </thead>
                     <tbody>
-                            @foreach ($data as $key => $value)
+                            @foreach ($studentunits as $key => $value)
                             <tr id="row_{{$value->id}}">
 
                                  <td>{{$value->id}}</td> 
-                                 <td>{{$value->competency_group}}</td> 
-                                 <td>{{$value->competency_name}}</td>            
-                                 <td><button class="btn btn-primary" style="color:white" onclick="showDialog({{$value->id}})">Edit</button></td>
-                                 <td><button data-id="{{$value->id}}" class="btn btn-danger unassigned">Delete</button></td>
+                                 <td><?php $n_id =$value->id; $semester = DB::table('semesters')->select('semesters.*')->where('id','=',$value->semester_id)->first(); echo $semester->semester_name;  ?>
+                                </td> 
+                          
+                                
+                                 <td><?php  $semester_units = DB::table('semester_units')->select('semester_units.*')->where('id','=',$value->semester_units_id)->first(); $unit_id =$semester_units->unit_id ; $lec_id = $semester_units->lecturer_id;
+                                 $unit = DB::table('units')->select('units.*')->where('id','=',$unit_id)->first(); echo $unit->unit_name; ?>
+                                </td> 
+                           
+                                
+                                 <td><?php  $lecturer = DB::table('lecturers')->select('lecturers.*')->where('id','=',$lec_id)->first(); echo $lecturer->first_name.' '.$lecturer->last_name;  ?>
+                                </td> 
+                                <td><button class="btn btn-primary"><a style="color:#ffffff" href="/assess/{{$n_id}}">Assess</a></button></td>
                             </tr>
                             
                             @endforeach
@@ -79,10 +86,10 @@
         function showDialog(id) {          
                     var data =$("form").serialize();
                console.log(id);
-               var url =   "{{ url('/edit-competency-modal') }}";
+               var url =   "#";
              //  var data = "id="+id;
 
-               $("#myModalLabel").html("Edit competency");
+               $("#myModalLabel").html("#");
                $("#modalBody").html("Loading...");  // Or use a progress bar...
                $("#myModal").modal("show");
                $.ajax({
@@ -101,7 +108,7 @@
         function edit(id){
             
             var data = $("form").serialize();
-            var url =   "{{ url('/edit-competency') }}";
+            var url =   "{{ url('#') }}";
         
             $.ajax({
                     type: "POST",

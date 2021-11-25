@@ -177,3 +177,8 @@ Route::get('/add-competencyscore', [App\Http\Controllers\CompetencyScoreControll
 Route::post('edit-competencyscore-modal', function (){ return view('competencyscores.edit_modal'); })->name('edit-competencyscore-modal');
 Route::post('edit-competencyscore', [App\Http\Controllers\CompetencyScoreController::class, 'edit'])->name('edit-competencyscore');
 Route::get('delete-competencyscore/{id}', [App\Http\Controllers\CompetencyScoreController::class, 'delete']);
+
+
+//evaluation routes
+Route::get('evaluate', [App\Http\Controllers\EvaluateController::class, 'student_courses'])->name('evaluate');
+Route::get('assess/{id}',[App\Http\Controllers\EvaluateController::class, 'assess'])->name('assess');
