@@ -182,3 +182,4 @@ Route::get('delete-competencyscore/{id}', [App\Http\Controllers\CompetencyScoreC
 //evaluation routes
 Route::get('evaluate', [App\Http\Controllers\EvaluateController::class, 'student_courses'])->name('evaluate');
 Route::get('assess/{id}',[App\Http\Controllers\EvaluateController::class, 'assess'])->name('assess');
+Route::post('assess', [App\Http\Controllers\EvaluateController::class, 'sub'])->name('assesssubmit');

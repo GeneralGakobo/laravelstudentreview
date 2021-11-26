@@ -154,6 +154,12 @@
           </a>
         </li>
         <li class="nav-item">
+          <a class="nav-link text-white " href="./results">
+            
+            <span class="nav-link-text ms-1">Evaluate</span>
+          </a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link text-white " href="./pages/notifications.html">
            
             <span class="nav-link-text ms-1"><i class="material-icons opacity-10">Results</i></span>

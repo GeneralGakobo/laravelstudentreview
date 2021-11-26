@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class resultsTable extends Model
 {
     use HasFactory;
-    protected $table="results_table";
+    protected $table="results_tables";
     protected $fillable=[
         'semester_units_id',
         'student_id',

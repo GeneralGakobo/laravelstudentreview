@@ -20,7 +20,7 @@
             <h6 class="m-0 font-weight-bold text-primary">assess</h6>  </div>
 
             <div class="card-body">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="{{ route('assesssubmit') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="semester_units_id" value="{{$id}}">
                 <?php
@@ -33,39 +33,31 @@
                     }
                 ?>
                 <input type="hidden" name="student_id" value="{{$student_id}}">
-                <table class="table table-bordered">
-               <tr>
-                   <thead>
-                       <th>Competency</th>
-                       <th>Scores</th>
-                   </thead>
-               </tr>
-            <?php
-                foreach($competencies as $key => $value){
-                    $plus = 0;
-                    $competency_id = $value->id;
-
+               
+               <ol>
+                    @foreach($competencies as $key=>$value)
+                    <?php $randInt = rand()?>
+                    <?php                   
+                        $here_id = $value->id;
+                        //echo $here_id;
                     ?>
-                    <input type="hidden" name="competency_id" value="{{$competency_id}}">
-                              
-               <tbody>
-                   <tr>
-                       <td>{{$value->competency_name}}</td>
-                       <td><?php
-                            foreach($competencyscores as $key => $value){
-                                
-                                   
-                                
-                            }
-                       ?></td>
-                   </tr>
-               </tbody>
-          
-           <?php } ?>
-           </table>
+                    <input type="hidden" name="adjArr[]" value="{{$here_id}}">
+                   <li style="font-size:20px;font-weight:bold;">{{$value->competency_name}}</li>
+
+                       <select name="acjArr[]" class="form-control">
+                      <option value="">--- Select Score ---</option>
+                       @foreach($competencyscores as $key => $score)
+                      
+                           <option value="{{$score->id}}">{{$score->score_name}}</option>
+                  @endforeach                    
+                    </select>
+                       <hr>                   
+                       <br>
+                    @endforeach
+                    </ol>      
+                    <input type="submit" class="btn col-md-12 btn-info" style="font-weight:bold;font-size:30px;" value="Submit">
+   
             </form>
-
-
 </div>
 </div>
 </div>
