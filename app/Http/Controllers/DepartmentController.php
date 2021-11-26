@@ -35,18 +35,15 @@ class DepartmentController extends Controller
 
             }
 
-         public function edit(Request $request){
+         public function edit_department(Request $request){
             $id=$request->id;
             $school_id=$request->school_id;
             $department=$request->department;
            // dd($request);
             department::where('id',$id)->update(['school_id'=>$school_id,'department'=>$department]);
-            $row = department::where('id',$request->get('id'))->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->school_id."</td>
-            <td>".$row->department."</td>
-            <td> <button type='button' class='btn btn-primary' data-toggle='modal' onclick='showDialog($row->id)'>Update</button></td>
-            ";
+            
+            return redirect('/departments')->with('success', "Department $department updated successfully");
+
          }
             
             public function delete($id){

@@ -43,12 +43,13 @@ class StaffCategoryController extends Controller
             $id=$request->id;
             $staff_category=$request->staff_category;
            // dd($request);
-            staffcategory:where('id',$id)->update(['staff_category'=>$staff_category]);
-            $row = staffcategory::where('id',$id)->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->staff_category."</td>
-            <td> <button type='button' class='btn btn-success' data-toggle='modal' onclick='showDialog($row->id)'>Updated</button></td>
-            ";
+            staffCategory::where('id',$id)->update(['staff_category'=>$staff_category]);
+            $row = staffCategory::where('id',$id)->first();
+            return redirect('staffcategory')->with('success', "Staff Category $staff_category Updated succesfully!");
+            // return "<td>".$row->id."</td>
+            // <td>".$row->staff_category."</td>
+            // <td> <button type='button' class='btn btn-success' data-toggle='modal' onclick='showDialog($row->id)'>Updated</button></td>
+            // ";
 
         }
         public function delete($id){

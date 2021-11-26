@@ -27,18 +27,18 @@ Route::get('register-student', [App\Http\Controllers\StudentController::class, '
 Route::post('student-reg', [App\Http\Controllers\StudentController::class, 'create_student'])->name('student-reg');
 
 
-Route::get('schools', [App\Http\Controllers\SchoolController::class, 'index']);
+Route::get('schools', [App\Http\Controllers\SchoolController::class, 'index_school']);
 Route::post('add-school', [App\Http\Controllers\SchoolController::class, 'create']);
 Route::get('/add-school', [App\Http\Controllers\SchoolController::class, 'create_page']);
 Route::post('edit-school-modal', function (){ return view('schools.edit_modal'); })->name('edit-school-modal');
-Route::post('edit-school', [App\Http\Controllers\SchoolController::class, 'edit'])->name('edit-school');
+Route::post('edit-school/{id}', [App\Http\Controllers\SchoolController::class, 'edit_school'])->name('edit-school');
 Route::get('delete-school/{id}', [App\Http\Controllers\SchoolController::class, 'delete']);
 //departments
 Route::get('departments', [App\Http\Controllers\DepartmentController::class, 'index']);
 Route::post('add-department', [App\Http\Controllers\DepartmentController::class, 'create']);
 Route::get('/add-department', [App\Http\Controllers\DepartmentController::class, 'create_page']);
 Route::post('edit-department-modal', function (){ $school = school::select('schools.*')->get(); return view('departments.edit_modal',[ "school"=>$school ]); })->name('edit-department-modal');
-Route::post('edit-department', [App\Http\Controllers\DepartmentController::class, 'edit'])->name('edit-department');
+Route::post('edit-department/{id}', [App\Http\Controllers\DepartmentController::class, 'edit_department'])->name('edit-department');
 Route::get('delete-department/{id}', [App\Http\Controllers\DepartmentController::class, 'delete']);
 
 //Designation
@@ -63,7 +63,7 @@ Route::get('staffcategory', [App\Http\Controllers\StaffCategoryController::class
 Route::post('add-staffcategory', [App\Http\Controllers\StaffCategoryController::class, 'create']);
 Route::get('/add-staffcategory', [App\Http\Controllers\StaffCategoryController::class, 'create_page']);
 Route::post('edit-staffcategory-modal', function (){ return view('staffcategory.edit_modal'); })->name('edit-staffcategory-modal');
-Route::post('edit-staffcategory', [App\Http\Controllers\StaffCategoryController::class, 'edit'])->name('edit-staffcategory');
+Route::post('edit-staffcategory/{id}', [App\Http\Controllers\StaffCategoryController::class, 'edit'])->name('edit-staffcategory');
 Route::get('delete-staffcategory/{id}', [App\Http\Controllers\StaffCategoryController::class, 'delete']);
 
 //competencygroups

@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class SchoolController extends Controller
 {
    
-    public function index()
+    public function index_school()
     {
         $schools = DB::table('schools')->orderBy('id', 'asc')->get();
 		return view('schools.school', ["schools" => $schools]);
@@ -39,17 +39,14 @@ class SchoolController extends Controller
             return redirect('/add-school')->with('success', 'Data saved succesfully');
         }
 
-        public function edit(Request $request){
+        public function edit_school(Request $request){
             $id=$request->id;
-            $school_name=$request->school_name;
-           // dd($request);
+            $school_name=$request->school_name;       
             school::where('id',$id)->update(['school_name'=>$school_name]);
-            $row = school::where('id',$id)->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->school_name."</td>
-            <td> <button type='button' class='btn btn-success' data-toggle='modal' onclick='showDialog($row->id)'>Updated</button></td>
-            ";
-
+            
+           
+            return redirect('/schools')->with('success', "School $school_name updated successfully");
+           
         }
         public function delete($id){
 

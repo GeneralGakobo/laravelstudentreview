@@ -40,7 +40,7 @@
                                  <td>{{$value->staff_category}}</td>       
                                  <td><button class="btn btn-primary" style="color:white" onclick="showDialog({{$value->id}})">Edit</button></td>
                                  <td><button data-id="{{$value->id}}" class="btn btn-danger unassigned">Delete</button></td>
-
+                                <?php  $bb = $value->id;  ?>
                             </tr>
                             
                             @endforeach
@@ -53,7 +53,7 @@
                 </div>
         
                    
-        <form action="" method="post">
+        <form action="/edit-staffcategory/{{$bb}}" method="post">
             @csrf
 
         <div class="modal fade" id="myModal" style="overflow:scroll;" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -97,22 +97,6 @@
                 });        
            }
 
-        function edit(id){
-            
-            var data = $("form").serialize();
-            var url =   "{{ url('/edit-staffcategory') }}";
-        
-            $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: data+"&id="+id, // serializes the form's elements.
-                    success: function(data)
-                    {
-                        //alert(data); // show response from the php script.
-                        $('#row_'+id).html(data);      
-                }
-                });
- }
 </script>
 <script src={{ asset("js/sweetalert.min.js")}}></script>
             <script type="text/javascript">

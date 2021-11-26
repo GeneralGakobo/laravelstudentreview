@@ -36,48 +36,29 @@
       </a>
     </div>
     <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-200" id="sidenav-collapse-main">
+    <div class="collapse navbar-collapse  w-auto  max-height-vh-300" id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link text-white active bg-gradient-primary" href="./pages/dashboard.html">
             <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
+
+
         <li class="nav-item">
-        <a class="nav-link collapsed text-white" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-           <span class="nav-link-text ms-1">Settings</span>
-         </a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link text-white " href="/schools">
-           
-            <span class="nav-link-text ms-1">Schools</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="/departments">
-           
-            <span class="nav-link-text ms-1">Departments</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="/designations">
-           
-            <span class="nav-link-text ms-1">Designations</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="/employmenttype">
-           
-            <span class="nav-link-text ms-1">EmploymentType</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-white " href="/staffcategory">
-           
-            <span class="nav-link-text ms-1">staff_category</span>
-          </a>
-        </li>
+        <a class="nav-link collapse" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">  
+          <span>Settings</span>       
+        <div id="collapsePages">
+        <div style="margin-right:15px;margin-left:15px;" class="bg-white py-2 collapse-inner rounded">
+      <a class="nav-link" href="/schools"> <span style="color:green;" class="text-green ms-1">Schools</span></a>
+      <a class="nav-link" href="/departments"> <span style="color:green;" class="text-green ms-1">Departments</span></a>
+      <a class="nav-link" href="/designations"> <span style="color:green;" class="text-green ms-1">Designations</span></a>
+      <a class="nav-link" href="/employmenttype"> <span style="color:green;" class="text-green ms-1">Employment Types</span></a>
+      <a class="nav-link" href="/staffcategory"> <span style="color:green;" class="text-green ms-1">Staff Category</span></a>
+    </div>
+      </div>
+      </li>
+
         <li class="nav-item">
           <a class="nav-link text-white " href="/competencygroups">
            
@@ -173,7 +154,7 @@
     </div>
     <div class="sidenav-footer position-absolute w-100 bottom-0 ">
       <div class="mx-3">
-        <a class="btn bg-gradient-primary mt-4 w-100" href="#" data-toggle="modal" data-target="#logoutModal" type="button">Logout</a>
+        <a class="btn bg-gradient-primary mt-2 w-100" href="#" data-toggle="modal" data-target="#logoutModal" type="button">Logout</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                    @csrf
                </form>
