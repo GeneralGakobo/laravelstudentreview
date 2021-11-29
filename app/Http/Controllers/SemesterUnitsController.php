@@ -52,16 +52,8 @@ class SemesterUnitsController extends Controller
             $lecturer_id=$request->lecturer_id;
             $semester_id=$request->semester_id;
            // dd($request);
-            semesterUnits::where('id',$id)->update(['reference_id'=>$reference_id,'unit_id'=>$unit_id,'group'=>$group,'lecturer_id'=>$lectuere_id,'semester_id'=>$semester_id]);
-            $row = semesterUnits::where('id',$request->get('id'))->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->reference_id."</td>
-            <td>".$row->unit_name."</td>
-            <td>".$row->group."</td>
-            <td>".$row->lecturer_id."</td>
-            <td>".$row->semester_id."</td>
-            <td> <button type='button' class='btn btn-primary' data-toggle='modal' onclick='showDialog($row->id)'>Update</button></td>
-            ";
+            semesterUnits::where('id',$id)->update(['reference_id'=>$reference_id,'unit_id'=>$unit_id,'group'=>$group,'lecturer_id'=>$lecturer_id,'semester_id'=>$semester_id]);
+            return redirect('/semesterunit')->with('success', "semesterun units $reference_id $unit_id $group $lecturer_id $semester_id updated successfully");
          }
             
             public function delete($id){

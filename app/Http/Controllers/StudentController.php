@@ -66,6 +66,21 @@ class StudentController extends Controller
 
            return redirect('/add-student')->with('success','Data saved succesfully!');
         }
+        
+        public function edit(Request $request){
+            $id=$request->id;
+            $first_name=$request->first_name;
+            $last_name=$request->last_name;
+            $reg_no=$request->reg_no;
+            $course_id=$request->course_id;
+            $study_year_id=$request->study_year_id;
+            $gender=$request->gender;
+            $mobile=$request->mobile;
+            $email=$request->email;
+           // dd($request);
+            student::where('id',$id)->update(['first_name'=>$first_name,'last_name'=>$last_name,'reg_no'=>$reg_no,'course_id'=>$course_id,'study_year_id'=>$study_year_id,'gender'=>$gender,'mobile'=>$mobile,'email'=>$email]);
+            return redirect('/student')->with('success', "student $first_name updated successfully");
+         }
 
             
             public function delete($id){

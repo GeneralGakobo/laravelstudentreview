@@ -16,6 +16,7 @@ $row = \App\Models\lecturer::where('id',$id)->first();
 <label for="">email</label>
 <input type="text" class="form-control" name="email" value="{{$row->email}}" />
 <br>
+<label for="">Designation</label>
 <select type="text" class="form-control" name="id" value="{{$row->designation_name}}">
 <option value="">-- select designation --</option>
 
@@ -31,7 +32,8 @@ $row = \App\Models\lecturer::where('id',$id)->first();
   @endforeach
 
 </select>
-<br> 
+<br>
+<label for="">Department</label> 
 <select type="text" class="form-control" name="department_id" value="{{$row->department}}">
 <option value="">-- select department --</option>
 
@@ -51,10 +53,7 @@ $row = \App\Models\lecturer::where('id',$id)->first();
 <label for="">mobile</label>
 <input type="text" class="form-control" name="mobile" value="{{$row->mobile}}" />
 <br>
-<label for="">image</label>
-<input type="text" class="form-control" name="image" value="{{$row->image}}" />
-<label for="">student</label>
-<br>
+<label for="">employment</label>
 <select type="text" class="form-control" name="employment_type_id" value="{{$row->employment_type}}">
 <option value="">-- select employmentType --</option>
 
@@ -71,6 +70,7 @@ $row = \App\Models\lecturer::where('id',$id)->first();
 
 </select>
 <br> 
+<label for="">staff category</label>
 <select type="text" class="form-control" name="staff_category_id" value="{{$row->staff_category}}">
 <option value="">-- select staff_category --</option>
 

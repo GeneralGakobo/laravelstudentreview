@@ -56,7 +56,7 @@
                                  <td>{{$value->staff_category}}</td>     
                                  <td><button class="btn btn-primary" style="color:white" onclick="showDialog({{$value->id}})">Edit</button></td>
                                  <td><button data-id="{{$value->id}}" class="btn btn-danger unassigned">Delete</button></td>
-
+                                
                             </tr>
                             
                             @endforeach

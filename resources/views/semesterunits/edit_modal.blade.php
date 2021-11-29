@@ -29,11 +29,39 @@ $row = \App\Models\semesterUnits::where('id',$id)->first();
 <input type="text" class="form-control" name="group" value="{{$row->group}}" />
 <br>
 <label for="">offered By</label>
-<input type="text" class="form-control" name="lecturer_id" value="{{$row->first_name}}" />
-<br>
-<label for="">semester</label>
-<input type="text" class="form-control" name="semester_id" value="{{$row->semester_name}}" />
-<br>
+<select type="text" class="form-control" name="lecturer_id" value="{{$row->first_name}}">
+<option value="">-- Select unit lecturer --</option>
+
+  @foreach($lecturer as $key=>$value)
+   @if($value->id == $row->unit_id)
+   <option selected value="{{$value->id}}">{{$value->first_name}}</option>
+
+   @else
+   <option value="{{$value->id}}">{{$value->first_name}}</option>
+
+   @endif
+
+  @endforeach
+
+</select>
+<br>  
+<label for="">Semester</label>
+<select type="text" class="form-control" name="semester_id" value="{{$row->semester_name}}">
+<option value="">-- Select semester --</option>
+
+  @foreach($semester as $key=>$value)
+   @if($value->id == $row->unit_id)
+   <option selected value="{{$value->id}}">{{$value->semester_name}}</option>
+
+   @else
+   <option value="{{$value->id}}">{{$value->semester_name}}</option>
+
+   @endif
+
+  @endforeach
+
+</select>
+<br>  
 </div>
     <div class="modal-footer">
       <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

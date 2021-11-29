@@ -43,13 +43,7 @@ class CourseController extends Controller
             $course_name=$request->course_name;
            // dd($request);
             course::where('id',$id)->update(['department_id'=>$department_id,'course_id'=>$course_id,'course_name'=>$course_name]);
-            $row = course::where('id',$request->get('id'))->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->department_id."</td>
-            <td>".$row->course_id."</td>
-            <td>".$row->course_name."</td>
-            <td> <button type='button' class='btn btn-primary' data-toggle='modal' onclick='showDialog($row->id)'>Update</button></td>
-            ";
+            return redirect('/course')->with('success',"courses $department_id $course_id $course_name upadated successfully");
          }
             
             public function delete($id){

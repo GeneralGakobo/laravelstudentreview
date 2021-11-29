@@ -43,13 +43,8 @@ class CompetenciesGroupsController extends Controller
             $id=$request->id;
             $competency_group=$request->competency_group;
            // dd($request);
-            competencygroups::where('id',$id)->update(['competency_group'=>$competency_group]);
-            $row = competencygroups::where('id',$id)->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->competency_group."</td>
-            <td> <button type='button' class='btn btn-success' data-toggle='modal' onclick='showDialog($row->id)'>Updated</button></td>
-            ";
-
+            competenciesGroups::where('id',$id)->update(['competency_group'=>$competency_group]);
+           return redirect('/competencygroups')->with('success',"competency group $competency_group updated successfully");
         }
         public function delete($id){
 

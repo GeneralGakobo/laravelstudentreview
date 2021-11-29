@@ -49,13 +49,7 @@ class StudentSelectedCourseController extends Controller
             $student_id=$request->student_id;
            // dd($request);
             studentSelectedCourse::where('id',$id)->update(['semester_id'=>$semester_id,'semester_units_id'=>$semester_units_id,'student_id'=>$student_id]);
-            $row = studentSelectedCourse::where('id',$request->get('id'))->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->semester_id."</td>
-            <td>".$row->semester_units_id."</td>
-            <td>".$row->student_id."</td>
-            <td> <button type='button' class='btn btn-primary' data-toggle='modal' onclick='showDialog($row->id)'>Update</button></td>
-            ";
+            return redirect("/studentselectedcourse")->with('success'," student selected course $semester_id $semester_units_id $student_id updated successfully");
          }
             public function delete($id){
                 $del = studentSelectedCourse::findOrFail($id);

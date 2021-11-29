@@ -51,7 +51,7 @@ class EvaluateController extends Controller
                 resultsTable::create(['semester_units_id'=>$semester_units_id,'student_id'=>$student_id,'competency_id'=>$value,'score_id'=>$acjValue]);
     
             }
-            return back()->with('success', 'Data saved succesfully');
+            return redirect('evaluate')->with('success', 'Data saved succesfully');
         
     }
 }

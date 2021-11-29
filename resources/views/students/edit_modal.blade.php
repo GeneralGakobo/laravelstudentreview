@@ -42,7 +42,18 @@ $row = \App\Models\student::where('id',$id)->first();
 </select>
 <br>   
 <label for="">study_year</label>
-<input type="text" class="form-control" name="study_year" value="{{$row->study_year}}" />
+<div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                            <label for=""><strong>Select Study Year</strong></label>
+                            <select name="study_year_id" class="form-control">
+                                <option value=''>--Select Study Year--</option>
+                                <?php
+                                    $major = DB::table('study_years')->select('study_years.*')->get();
+                                    foreach($major as $key => $value){
+                                    echo "<option value='$value->id'>$value->study_year</option>";
+                                    }
+                                    ?>
+                            </select>
 </div>
     <div class="modal-footer">
       <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>

@@ -32,7 +32,7 @@ class LecturerController extends Controller
             $employmentType = employmentType::select('employment_types.*')->get();
             $staffCategory = staffCategory::select('staff_categories.*')->get();
             $designation = designation::select('designations.*')->get();
-            $Department = Department::select('departments.*')->get();
+            $epartment = Department::select('departments.*')->get();
             return view('lecturers.add_lecturer', ["Department"=>$Department,"designation"=>$designation,"staffCategory"=>$staffCategory,"employmentType"=>$employmentType]);
         }
 
@@ -76,7 +76,22 @@ class LecturerController extends Controller
 
            return redirect('/add-lecturer')->with('success','Data saved succesfully!');
         }
-
+        public function edit(Request $request){
+            $id=$request->id;
+            $first_name=$request->first_name;
+            $last_name=$request->last_name;
+            $reference_no=$request->reference_no;
+            $department_id=$request->department_id;
+            $staff_category_id=$request->staff_category_id;
+            $employment_type_id=$request->employment_type_id;
+            $designation=$request->designation;
+            $mobile=$request->mobile;
+            $email=$request->email;
+           // dd($request);
+            lecturer::where('id',$id)->update(['first_name'=>$first_name,'last_name'=>$last_name,'reference_no'=>$reference_no,'department_id'=>$department_id,'staff_category_id'=>$staff_category_id,'employment_type_id,'=>$employment_type_id,'designation'=>$designation,'mobile'=>$mobile,'email'=>$email]);
+            
+            return redirect("/lecturer")->with('success'," lecturer $first_name $last_name $email $mobile $designation $reference_no $department_id $staff_category_id $employment_type_id updated successfully");
+         }
             
             public function delete($id){
                 $del = lecturer::findOrFail($id);

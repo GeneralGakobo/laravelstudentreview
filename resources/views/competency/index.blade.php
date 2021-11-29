@@ -42,6 +42,9 @@
                                  <td>{{$value->competency_name}}</td>            
                                  <td><button class="btn btn-primary" style="color:white" onclick="showDialog({{$value->id}})">Edit</button></td>
                                  <td><button data-id="{{$value->id}}" class="btn btn-danger unassigned">Delete</button></td>
+
+                              <?php $bb = $value->id; ?>
+                                
                             </tr>
                             
                             @endforeach
@@ -54,7 +57,7 @@
                 </div>
         
                    
-        <form action="" method="post">
+        <form action="/edit-competency/{{$bb}}" method="post">
             @csrf
 
         <div class="modal fade" id="myModal" style="overflow:scroll;" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

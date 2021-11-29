@@ -41,14 +41,8 @@ class UnitsController extends Controller
             $unit_name=$request->unit_name;
            // dd($request);
             units::where('id',$id)->update(['course_id'=>$course_id,'unit_name'=>$unit_name]);
-            $row = units::where('id',$request->get('id'))->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->course_id."</td>
-            <td>".$row->unit_name."</td>
-            <td> <button type='button' class='btn btn-primary' data-toggle='modal' onclick='showDialog($row->id)'>Update</button></td>
-            ";
+          return redirect('unit')->with('success',"units $course_id $unit_name updated successfully");
          }
-            
             public function delete($id){
                 $del = units::findOrFail($id);
                 $del->delete();

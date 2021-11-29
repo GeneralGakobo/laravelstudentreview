@@ -47,12 +47,7 @@ class  CompetencyScoreController extends Controller
             $score_value=$request->score_value;
            // dd($request);
            competencyScore::where('id',$id)->update(['score_name'=>$score_name,'score_value'=>$score_value]);
-            $row = competencyScore::where('id',$request->get('id'))->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->score_name."</td>
-            <td>".$row->score_value."</td>
-            <td> <button type='button' class='btn btn-primary' data-toggle='modal' onclick='showDialog($row->id)'>Update</button></td>
-            ";
+            return redirect("/competencyscore")->with('success'," competency score $score_name $score_value updated successfuly");
          }
             
             public function delete($id){

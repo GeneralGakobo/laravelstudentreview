@@ -55,16 +55,8 @@ class  SemesterController extends Controller
             $academic_year=$request->academic_year;
             $is_active=$request->is_active;
            // dd($request);
-            semester::where('id',$id)->update(['semester_name'=>$semester_name,'date_from'=>$date_from,'date_to'=>$date_to,'academic_year'=>$academic_year,'is_active]'=>$is_active]);
-            $row = semester::where('id',$request->get('id'))->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->semester_name."</td>
-            <td>".$row->date_from."</td>
-            <td>".$row->date_to."</td>
-            <td>".$row->academic_year."</td>
-            <td>".$row->is_active."</td>
-            <td> <button type='button' class='btn btn-primary' data-toggle='modal' onclick='showDialog($row->id)'>Update</button></td>
-            ";
+            semester::where('id',$id)->update(['semester_name'=>$semester_name,'date_from'=>$date_from,'date_to'=>$date_to,'academic_year'=>$academic_year,'is_active'=>$is_active]);
+            return redirect('/semester')->with('success', "semester $semester_name $date_from $date_to $academic_year $is_active updated successfully");
          }
             
             public function delete($id){

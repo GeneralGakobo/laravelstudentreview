@@ -57,7 +57,14 @@ class AdminsController extends Controller
 
            return redirect('/add-admin')->with('success','Data saved succesfully!');
         }
-
+        public function edit(Request $request){
+            $id=$request->id;
+            $name=$request->name;
+            $email=$request->email;
+           // dd($request);
+            admins::where('id',$id)->update(['name'=>$name,'email'=>$email]);
+            return redirect('/admin')->with('success', "admins $name $email updated successfully");
+        }
             
             public function delete($id){
                 $del = admins::findOrFail($id);

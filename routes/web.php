@@ -47,7 +47,7 @@ Route::get('designations', [App\Http\Controllers\DesignationController::class, '
 Route::post('add-designation', [App\Http\Controllers\DesignationController::class, 'create']);
 Route::get('/add-designation', [App\Http\Controllers\DesignationController::class, 'create_page']);
 Route::post('edit-designation-modal', function (){ return view('designation.edit_modal'); })->name('edit-designation-modal');
-Route::post('edit-designation', [App\Http\Controllers\DesignationController::class, 'edit'])->name('edit-designation');
+Route::post('edit-designation/{id}', [App\Http\Controllers\DesignationController::class, 'edit'])->name('edit-designation');
 Route::get('delete-designation/{id}', [App\Http\Controllers\DesignationController::class, 'delete']);
 
 //employmenttype
@@ -55,7 +55,7 @@ Route::get('employmenttype', [App\Http\Controllers\EmploymentTypeController::cla
 Route::post('add-employmenttype', [App\Http\Controllers\EmploymentTypeController::class, 'create']);
 Route::get('/add-employmenttype', [App\Http\Controllers\EmploymentTypeController::class, 'create_page']);
 Route::post('edit-employmenttype-modal', function (){ return view('employmenttypes.edit_modal'); })->name('edit-employmenttype-modal');
-Route::post('edit-employmenttype', [App\Http\Controllers\EmploymentTypeController::class, 'edit'])->name('edit-employmenttype');
+Route::post('edit-employmenttype/{id}', [App\Http\Controllers\EmploymentTypeController::class, 'edit'])->name('edit-employmenttype');
 Route::get('delete-employmenttype/{id}', [App\Http\Controllers\EmploymentTypeController::class, 'delete']);
 
 //staffcategory
@@ -71,7 +71,7 @@ Route::get('competencygroups', [App\Http\Controllers\CompetenciesGroupsControlle
 Route::post('add-competencygroups', [App\Http\Controllers\CompetenciesGroupsController::class, 'create']);
 Route::get('/add-competencygroups', [App\Http\Controllers\CompetenciesGroupsController::class, 'create_page']);
 Route::post('edit-competencygroups-modal', function (){ return view('competencygroups.edit_modal'); })->name('edit-competencygroups-modal');
-Route::post('edit-competencygroups', [App\Http\Controllers\CompetenciesGroupsController::class, 'edit'])->name('edit-competencygroups');
+Route::post('edit-competencygroups/{id}', [App\Http\Controllers\CompetenciesGroupsController::class, 'edit'])->name('edit-competencygroups');
 Route::get('delete-competencygroups/{id}', [App\Http\Controllers\CompetenciesGroupsController::class, 'delete']);
 
 //students
@@ -79,7 +79,7 @@ Route::get('student', [App\Http\Controllers\StudentController::class, 'index']);
 Route::post('add-students', [App\Http\Controllers\StudentController::class, 'create'])->name('add-students');
 Route::get('/add-student', [App\Http\Controllers\StudentController::class, 'create_page']);
 Route::post('edit-student-modal', function (){ $course = course::select('courses.*')->get(); return view('students.edit_modal',[ "course"=>$course ]); })->name('edit-student-modal');
-Route::post('edit-student', [App\Http\Controllers\StudentController::class, 'edit'])->name('edit-student');
+Route::post('edit-student/{id}', [App\Http\Controllers\StudentController::class, 'edit'])->name('edit-student');
 Route::get('delete-student/{id}', [App\Http\Controllers\StudentController::class, 'delete']);
 
 //admins
@@ -87,7 +87,7 @@ Route::get('admin', [App\Http\Controllers\AdminsController::class, 'index']);
 Route::post('add-admin', [App\Http\Controllers\AdminsController::class, 'create'])->name('add-admin');
 Route::get('/add-admin', [App\Http\Controllers\AdminsController::class, 'create_page']);
 Route::post('edit-admin-modal', function (){ $admins = admins::select('admins.*')->get(); return view('admins.edit_modal',[ "admins"=>$admins ]); })->name('edit-admin-modal');
-Route::post('edit-admin', [App\Http\Controllers\AdminsController::class, 'edit'])->name('edit-admin');
+Route::post('edit-admin/{id}', [App\Http\Controllers\AdminsController::class, 'edit'])->name('edit-admin');
 Route::get('delete-admin/{id}', [App\Http\Controllers\AdminsController::class, 'delete']);
  
 //lecturers
@@ -99,7 +99,7 @@ Route::post('edit-lecturer-modal', function (){ $Department = Department::select
     $designation=designation::select('designations.*')->get();
     $staffCategory=staffCategory::select('staff_categories.*')->get();
      return view('lecturers.edit_modal',[ "Department"=>$Department ,"employmentType"=>$employmentType,"staffCategory"=>$staffCategory,"designation"=>$designation]); })->name('edit-lecturer-modal');
-Route::post('edit-lecturer', [App\Http\Controllers\LecturerController::class, 'edit'])->name('edit-lecturer');
+Route::post('edit-lecturer/{id}', [App\Http\Controllers\LecturerController::class, 'edit'])->name('edit-lecturer');
 Route::get('delete-lecturer/{id}', [App\Http\Controllers\LecturerController::class, 'delete']);
 
 //HOD
@@ -119,7 +119,7 @@ Route::get('unit', [App\Http\Controllers\UnitsController::class, 'index']);
 Route::post('add-unit', [App\Http\Controllers\UnitsController::class, 'create']);
 Route::get('/add-unit', [App\Http\Controllers\UnitsController::class, 'create_page']);
 Route::post('edit-unit-modal', function (){ $course = course::select('courses.*')->get(); return view('units.edit_modal',[ "course"=>$course ]); })->name('edit-unit-modal');
-Route::post('edit-unit', [App\Http\Controllers\UnitsController::class, 'edit'])->name('edit-unit');
+Route::post('edit-unit/{id}', [App\Http\Controllers\UnitsController::class, 'edit'])->name('edit-unit');
 Route::get('delete-unit/{id}', [App\Http\Controllers\UnitsController::class, 'delete']);
 
 //course
@@ -127,15 +127,15 @@ Route::get('course', [App\Http\Controllers\CourseController::class, 'index']);
 Route::post('add-course', [App\Http\Controllers\CourseController::class, 'create']);
 Route::get('/add-course', [App\Http\Controllers\CourseController::class, 'create_page']);
 Route::post('edit-course-modal', function (){ $Department = Department::select('departments.*')->get(); return view('course.edit_modal',[ "Department"=>$Department ]); })->name('edit-course-modal');
-Route::post('edit-course', [App\Http\Controllers\CourseController::class, 'edit'])->name('edit-course');
+Route::post('edit-course/{id}', [App\Http\Controllers\CourseController::class, 'edit'])->name('edit-course');
 Route::get('delete-course/{id}', [App\Http\Controllers\CourseController::class, 'delete']);
 
 //competency
-Route::get('competency', [App\Http\Controllers\CompetencyController::class, 'index']);
+Route::get('/competency', [App\Http\Controllers\CompetencyController::class, 'index']);
 Route::post('add-competency', [App\Http\Controllers\CompetencyController::class, 'create']);
-Route::get('/add-competency', [App\Http\Controllers\CompetencyController::class, 'create_page']);
+Route::get('/add-competency',[App\Http\Controllers\CompetencyController::class, 'create_page']);
 Route::post('edit-competency-modal', function (){ $competenciesGroups = competenciesGroups::select('competencies_groups.*')->get(); return view('competency.edit_modal',[ "competenciesGroups"=>$competenciesGroups ]); })->name('edit-competency-modal');
-Route::put('edit-competency', [App\Http\Controllers\CompetencyController::class, 'edit_'])->name('edit-competency');
+Route::post('edit-competency/{id}', [App\Http\Controllers\CompetencyController::class, 'edit'])->name('edit-competency');
 Route::get('delete-competency/{id}', [App\Http\Controllers\CompetencyController::class, 'delete']);
 
 //semester
@@ -143,7 +143,7 @@ Route::get('semester', [App\Http\Controllers\SemesterController::class, 'index']
 Route::post('add-semester', [App\Http\Controllers\SemesterController::class, 'create']);
 Route::get('/add-semester', [App\Http\Controllers\SemesterController::class, 'create_page']);
 Route::post('edit-semester-modal', function (){ return view('semesters.edit_modal'); })->name('edit-semester-modal');
-Route::post('edit-semester', [App\Http\Controllers\SemesterController::class, 'edit'])->name('edit-semester');
+Route::post('edit-semester/{id}', [App\Http\Controllers\SemesterController::class, 'edit'])->name('edit-semester');
 Route::get('delete-semester/{id}', [App\Http\Controllers\SemesterController::class, 'delete']);
 
 //semesterunits
@@ -155,7 +155,7 @@ Route::post('edit-semesterunit-modal', function (){
     $lecturer = lecturer::select('lecturers.*')->get();
     $semester = semester::select('semesters.*')->get();
      return view('semesterunits.edit_modal',[ "semesterUnits"=>$semesterUnits,"lecturer"=>$lecturer,"semester"=>$semester]); })->name('edit-semesterunit-modal');
-Route::post('edit-semesterunit', [App\Http\Controllers\SemesterUnitsController::class, 'edit'])->name('edit-semesterunit');
+Route::post('edit-semesterunit/{id}', [App\Http\Controllers\SemesterUnitsController::class, 'edit'])->name('edit-semesterunit');
 Route::get('delete-semesterunit/{id}', [App\Http\Controllers\SemesterUnitsController::class, 'delete']);
 
 //studentselectedcourses
@@ -167,7 +167,7 @@ Route::post('edit-studentselectedcourse-modal', function (){
     $student = student::select('students.*')->get();
     $semesterUnits = semesterUnits::select('semester_units.*')->get();
      return view('studentselectedcourses.edit_modal',[ "semester"=>$semester,"student"=>$student,"semesterUnits"=>$semesterUnits]); })->name('edit-studentselectedcourse-modal');
-Route::post('edit-studentselectedcourse', [App\Http\Controllers\StudentSelectedCourseController::class, 'edit'])->name('edit-studentselectedcourse');
+Route::post('edit-studentselectedcourse/{id}', [App\Http\Controllers\StudentSelectedCourseController::class, 'edit'])->name('edit-studentselectedcourse');
 Route::get('delete-studentselectedcourse/{id}', [App\Http\Controllers\StudentSelectedCourseController::class, 'delete']);
 
 //competencyscore
@@ -175,7 +175,7 @@ Route::get('competencyscore', [App\Http\Controllers\CompetencyScoreController::c
 Route::post('add-competencyscore', [App\Http\Controllers\CompetencyScoreController::class, 'create']);
 Route::get('/add-competencyscore', [App\Http\Controllers\CompetencyScoreController::class, 'create_page']);
 Route::post('edit-competencyscore-modal', function (){ return view('competencyscores.edit_modal'); })->name('edit-competencyscore-modal');
-Route::post('edit-competencyscore', [App\Http\Controllers\CompetencyScoreController::class, 'edit'])->name('edit-competencyscore');
+Route::post('edit-competencyscore/{id}', [App\Http\Controllers\CompetencyScoreController::class, 'edit'])->name('edit-competencyscore');
 Route::get('delete-competencyscore/{id}', [App\Http\Controllers\CompetencyScoreController::class, 'delete']);
 
 

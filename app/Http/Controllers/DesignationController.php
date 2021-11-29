@@ -44,11 +44,7 @@ class DesignationController extends Controller
             $designation_name=$request->designation_name;
            // dd($request);
             designation::where('id',$id)->update(['designation_name'=>$designation_name]);
-            $row = designation::where('id',$id)->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->designation_name."</td>
-            <td> <button type='button' class='btn btn-success' data-toggle='modal' onclick='showDialog($row->id)'>Updated</button></td>
-            ";
+            return redirect("/designations")->with('success',"designation $designation_name updated successfully");
 
         }
         public function delete($id){

@@ -44,12 +44,7 @@ class EmploymentTypeController extends Controller
             $employment_type=$request->employment_type;
            // dd($request);
             employmenttype::where('id',$id)->update(['employment_type'=>$employment_type]);
-            $row = employmenttype::where('id',$id)->first();
-            return "<td>".$row->id."</td>
-            <td>".$row->employment_type."</td>
-            <td> <button type='button' class='btn btn-success' data-toggle='modal' onclick='showDialog($row->id)'>Updated</button></td>
-            ";
-
+            return redirect("/employmenttype")->with('success',"designation $employment_type updated successfully");
         }
         public function delete($id){
 
